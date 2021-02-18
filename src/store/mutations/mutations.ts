@@ -3,7 +3,13 @@ import { IArticleData } from '@/entities'
 
 export const mutations: IMutations = {
   fetchArticles (state: IState, payload: IArticleData[]): void {
-    payload.map(article => state.articles.push(article))
+    payload.map(article => {
+      const index = state.articles.indexOf(article, 0)
+      if (index !== -1) {
+        state.articles.splice(index, 1)
+      }
+      state.articles.push(article)
+    })
   },
 
   createComment (state: IState, payload: IMutationsCreateCommentMutationPayload): void {
