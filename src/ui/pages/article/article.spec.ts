@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import { HomePage } from './home'
-import { mount, createLocalVue, Wrapper } from '@vue/test-utils'
 import VueRouter from 'vue-router'
+import { ArticlePage } from './article'
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils'
 import { mockStorage } from '@/store'
 import { mockArticles } from '@/entities'
 
@@ -12,13 +12,13 @@ Vue.use(VueRouter)
 const localVue = createLocalVue()
 const storage = mockStorage()
 
-storage.getters.getAllArticles.mockReturnValueOnce(mockArticles())
+storage.getters.getOneArticleById.mockReturnValueOnce(mockArticles()[0])
 
-describe('>>> HomePage', () => {
-  let wrapper: Wrapper<HomePage>
+describe('>>> Article Page', () => {
+  let wrapper: Wrapper<ArticlePage>
 
   beforeEach(() => {
-    wrapper = mount(HomePage, {
+    wrapper = mount(ArticlePage, {
       localVue,
       vuetify: new Vuetify(),
       router: new VueRouter(),
